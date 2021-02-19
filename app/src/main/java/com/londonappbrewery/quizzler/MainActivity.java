@@ -52,6 +52,14 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (savedInstanceState != null)
+        {
+            mScore  = savedInstanceState.getInt("ScoreKey");
+            mIndex = savedInstanceState.getInt("IndexKey");
+        } else {
+            mScore = 0;
+            mIndex = 0;
+        }
         mTrueButton = findViewById(R.id.true_button);
         mFalseButton = findViewById(R.id.false_button);
         mQuestion_TextView = findViewById(R.id.question_text_view);
@@ -129,5 +137,14 @@ public class MainActivity extends Activity {
                     R.string.incorrect_toast,
                     Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("ScoreKey", mScore);
+        outState.putInt("IndexKey", mIndex);
+
     }
 }
